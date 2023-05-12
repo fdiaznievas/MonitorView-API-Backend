@@ -4,30 +4,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.addEntry = exports.getEntries = void 0;
-const novedades_json_1 = __importDefault(require("./novedades.json"));
-const novedades = novedades_json_1.default;
-class NovedadesService {
+const agenda_json_1 = __importDefault(require("./agenda.json"));
+const agenda = agenda_json_1.default;
+class ContactosService {
     constructor() {
-        this.listNovedades = novedades;
-        this.generate();
+        this.listContactos = agenda;
     }
     generate() {
     }
     create() {
     }
     find() {
-        return this.listNovedades;
+        return this.listContactos;
     }
     findOne(id) {
-        return this.listNovedades.find(item => item.id == id);
+        return this.listContactos.find(item => item.id == id);
     }
     update() {
     }
     delete() {
     }
 }
-exports.default = NovedadesService;
-const getEntries = () => novedades;
+exports.default = ContactosService;
+const getEntries = () => agenda;
 exports.getEntries = getEntries;
 const addEntry = () => null;
 exports.addEntry = addEntry;
