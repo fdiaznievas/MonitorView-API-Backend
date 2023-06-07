@@ -14,27 +14,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express")); //ESModules
 // const express = require('expres') → Commonjs
-const novedadesServices_1 = __importDefault(require("../services/novedadesServices"));
+const zabbixServices_1 = __importDefault(require("../services/zabbixServices"));
 const router = express_1.default.Router();
-const service = new novedadesServices_1.default();
+const service = new zabbixServices_1.default();
 router.get('/', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const novedades = yield service.find();
-    res.json(novedades);
+    const zabbix = yield service.find();
+    res.json(zabbix);
 }));
-router.get('/:id', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { id } = _req.params;
-    const novedad = yield service.findOne(id);
-    if (novedad != null) {
-        res.status(200).json(novedad);
+router.get('/:timeId', (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { timeId } = _req.params;
+        const zabbix = yield service.findOne(timeId);
+        res.json(zabbix);
     }
-    else {
-        res.status(404).json({
-            message: 'not found'
-        });
+    catch (error) {
+        next(error);
     }
 }));
 //parametros Query
-router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get('/', (req, res) => {
     const { limit, offset } = req.query;
     if (limit && offset) {
         res.json({
@@ -45,28 +43,21 @@ router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     else {
         res.send("No se enviaron parámetros");
     }
+});
+router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const body = req.body;
+    const newZabbixAlert = yield service.create(body);
+    res.status(201).json(newZabbixAlert);
 }));
-router.post('/', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const body = _req.body;
-    const newNovedad = yield service.create(body);
-    res.status(201).json(newNovedad);
+router.patch('/:time', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { time } = req.params;
+    const body = req.body;
+    const alertaZabbix = yield service.update(time, body);
+    res.json(alertaZabbix);
 }));
-router.patch('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const { id } = req.params;
-        const body = req.body;
-        const novedad = yield service.update(id, body);
-        res.json(novedad);
-    }
-    catch (error) {
-        res.status(404).json({
-            message: error.message
-        });
-    }
-}));
-router.delete('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { id } = req.params;
-    const respuesta = yield service.delete(id);
-    res.json(respuesta);
+router.delete('/:time', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { time } = req.params;
+    const deleteAlert = yield service.delete(time);
+    res.json(deleteAlert);
 }));
 exports.default = router;

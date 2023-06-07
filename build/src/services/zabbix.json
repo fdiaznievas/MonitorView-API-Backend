@@ -1,0 +1,246 @@
+[
+    {
+        "Severity": "Medium",
+        "Time": 44992.60686342593,
+        "Status": "PROBLEM",
+        "Host": "CordiezGuinazu_CCTV",
+        "Problem": "Prevencion Fraude - CCTV - No disponible por ping ICMP DIA",
+        "Duration": "4m 46s",
+        "Ack": "No",
+        "Actions": "Actions (1)"
+    },
+    {
+        "Severity": "Medium",
+        "Time": 44992.57628472222,
+        "Status": "PROBLEM",
+        "Host": "IVECO5_ATM-ISLA_Ro",
+        "Problem": "Monitoreo - No disponible por ping ICMP",
+        "Duration": "48m 48s",
+        "Ack": "No"
+    },
+    {
+        "Severity": "Medium",
+        "Time": 44992.291921296295,
+        "Status": "PROBLEM",
+        "Host": "CALCHIN",
+        "Problem": "Prevencion Fraude - CCTV - No disponible por ping ICMP DIA",
+        "Duration": "7h 38m 17s",
+        "Ack": "No",
+        "Actions": "Messages (1), Actions (2)"
+    },
+    {
+        "Severity": "Medium",
+        "Time": 44992.2918287037,
+        "Status": "PROBLEM",
+        "Host": "ATMMovil2_CCTV",
+        "Problem": "Prevencion Fraude - CCTV - No disponible por ping ICMP DIA",
+        "Duration": "7h 38m 25s",
+        "Ack": "No",
+        "Actions": "Messages (1), Actions (2)"
+    },
+    {
+        "Severity": "Medium",
+        "Time": 44992.29179398148,
+        "Status": "PROBLEM",
+        "Host": "ATMMovil3_CCTV",
+        "Problem": "Prevencion Fraude - CCTV - No disponible por ping ICMP DIA",
+        "Duration": "7h 38m 28s",
+        "Ack": "No",
+        "Actions": "Messages (1), Actions (2)"
+    },
+    {
+        "Severity": "Medium",
+        "Time": 44992.29175925926,
+        "Status": "PROBLEM",
+        "Host": "ATMMovil4_CCTV",
+        "Problem": "Prevencion Fraude - CCTV - No disponible por ping ICMP DIA",
+        "Duration": "7h 38m 31s",
+        "Ack": "No",
+        "Actions": "Messages (1), Actions (2)"
+    },
+    {
+        "Severity": "High",
+        "Time": 44991.992685185185,
+        "Status": "PROBLEM",
+        "Host": "e058_calchinOeste",
+        "Problem": "Redes Monitoreo - No disponible por ping ICMP",
+        "Duration": "14h 49m 11s",
+        "Ack": "No",
+        "Actions": "Messages (1), Actions (1)"
+    },
+    {
+        "Severity": "Medium",
+        "Time": 44991.7725462963,
+        "Status": "PROBLEM",
+        "Host": "MinisterioDeCienciaYTecnologia_ATM-ISLA_Ro",
+        "Problem": "Monitoreo - I/O: Alto uso de memoria",
+        "Duration": "20h 6m 11s",
+        "Ack": "No",
+        "Actions": "Messages (1), Actions (1)"
+    },
+    {
+        "Severity": "High",
+        "Time": 44991.591215277775,
+        "Status": "PROBLEM",
+        "Host": "430_Ro1861_VillaHuidobro",
+        "Problem": "Redes Monitoreo - No disponible por ping ICMP",
+        "Duration": "1d 27m",
+        "Ack": "Yes",
+        "Actions": "Messages (1), Actions (1)"
+    },
+    {
+        "Severity": "High",
+        "Time": 44991.59037037037,
+        "Status": "PROBLEM",
+        "Host": "330_Ro1861_HuincaRenanco",
+        "Problem": "Redes Monitoreo - No disponible por ping ICMP",
+        "Duration": "1d 28m",
+        "Ack": "Yes",
+        "Actions": "Messages (1), Actions (1)"
+    },
+    {
+        "Severity": "High",
+        "Time": 44991.58928240741,
+        "Status": "PROBLEM",
+        "Host": "430_Ro_VillaHuidobro",
+        "Problem": "Redes Monitoreo - No disponible por ping ICMP",
+        "Duration": "1d 30m",
+        "Ack": "Yes",
+        "Actions": "Messages (1), Actions (1)"
+    },
+    {
+        "Severity": "High",
+        "Time": 44991.589270833334,
+        "Status": "PROBLEM",
+        "Host": "330_Ro_HuincaRenanco",
+        "Problem": "Redes Monitoreo - No disponible por ping ICMP",
+        "Duration": "1d 30m",
+        "Ack": "Yes",
+        "Actions": "Messages (1), Actions (1)"
+    },
+    {
+        "Severity": "Medium",
+        "Time": 44991.54859953704,
+        "Status": "PROBLEM",
+        "Host": "YPFRuta9_ATM-ISLA_Ro",
+        "Problem": "Monitoreo - No disponible por ping ICMP",
+        "Duration": "1d 1h 28m",
+        "Ack": "Yes",
+        "Actions": "Messages (1), Actions (1)"
+    },
+    {
+        "Severity": "Medium",
+        "Time": 44991.48386574074,
+        "Status": "PROBLEM",
+        "Host": "YPFJuanBJusto_ATM-Isla_Ro",
+        "Problem": "Monitoreo - No disponible por ping ICMP",
+        "Duration": "1d 3h 1m",
+        "Ack": "Yes",
+        "Actions": "Messages (1), Actions (1)"
+    },
+    {
+        "Severity": "Medium",
+        "Time": 44988.51211805556,
+        "Status": "PROBLEM",
+        "Host": "MinisterioDeCienciaYTecnologia_ATM-ISLA_Ro",
+        "Problem": "Monitoreo - Processor: Alto uso de memoria",
+        "Duration": "4d 2h 21m",
+        "Ack": "No"
+    },
+    {
+        "Severity": "Medium",
+        "Time": 44987.60402777778,
+        "Status": "PROBLEM",
+        "Host": "IVECO2_ATM-ISLA_Ro",
+        "Problem": "Monitoreo - No disponible por ping ICMP",
+        "Duration": "5d 8m",
+        "Ack": "No"
+    },
+    {
+        "Severity": "Medium",
+        "Time": 44984.666550925926,
+        "Status": "PROBLEM",
+        "Host": "IVECO4_ATM-ISLA_Ro",
+        "Problem": "Monitoreo - No disponible por ping ICMP",
+        "Duration": "7d 22h 38m",
+        "Ack": "Yes",
+        "Actions": "Messages (1), Actions (1)"
+    },
+    {
+        "Severity": "Medium",
+        "Time": 44979.64570601852,
+        "Status": "PROBLEM",
+        "Host": "IVECO3_ATM-ISLA_Ro",
+        "Problem": "Monitoreo - No disponible por ping ICMP",
+        "Duration": "12d 23h 8m",
+        "Ack": "Yes",
+        "Actions": "Messages (1), Actions (1)"
+    },
+    {
+        "Severity": "Low",
+        "Time": 44957.082141203704,
+        "Status": "PROBLEM",
+        "Host": "e057_Ro_LaPuerta",
+        "Problem": "Redes - No hay recopilaciÃ³n de datos SNMP",
+        "Duration": "1m 5d 12h",
+        "Ack": "No"
+    },
+    {
+        "Severity": "Medium",
+        "Time": 44914.80887731481,
+        "Status": "PROBLEM",
+        "Host": "IVECO1_ATM-ISLA_Ro",
+        "Problem": "Monitoreo - No disponible por ping ICMP",
+        "Duration": "2m 17d 19h",
+        "Ack": "Yes",
+        "Actions": "Messages (1), Actions (1)"
+    },
+    {
+        "Severity": "High",
+        "Time": 44909.766875,
+        "Status": "PROBLEM",
+        "Host": "e085_Ro_RioCuartoTribunales",
+        "Problem": "Redes Monitoreo - No disponible por ping ICMP",
+        "Duration": "2m 22d 20h",
+        "Ack": "Yes",
+        "Actions": "Messages (1), Actions (1)"
+    },
+    {
+        "Severity": "High",
+        "Time": 44909.76443287037,
+        "Status": "PROBLEM",
+        "Host": "e085_Ro1861_RioCuartoTribunales",
+        "Problem": "Redes Monitoreo - No disponible por ping ICMP",
+        "Duration": "2m 22d 20h",
+        "Ack": "Yes",
+        "Actions": "Messages (1), Actions (1)"
+    },
+    {
+        "Severity": "Medium",
+        "Time": 44811.38716435185,
+        "Status": "PROBLEM",
+        "Host": "CPCPueyrredon_ATMisla_Ro",
+        "Problem": "Monitoreo - Interfaz AT0/0/0 WAN - Estado operativo - Caido",
+        "Duration": "6m 1d 5h",
+        "Ack": "Yes",
+        "Actions": "Messages (2), Actions (2)"
+    },
+    {
+        "Severity": "High",
+        "Time": 44588.647939814815,
+        "Status": "PROBLEM",
+        "Host": "MunicipalidadDeCordoba_ATM-ISLA_Ro",
+        "Problem": "Monitoreo - No disponible por ping ICMP",
+        "Duration": "1y 1m 8d",
+        "Ack": "No"
+    },
+    {
+        "Severity": "High",
+        "Time": 44588.64770833333,
+        "Status": "PROBLEM",
+        "Host": "e012_Ro_MunicipalidadCordoba",
+        "Problem": "Monitoreo - No disponible por ping ICMP",
+        "Duration": "1y 1m 8d",
+        "Ack": "No"
+    }
+]

@@ -7,8 +7,4 @@ router.get('/', (_req, res) => {
   res.send("Este endpoint es el Index")
 })
 
-router.post('/', (_req, res) => {
-  res.send('Realizando POST')
-})
-
 export default router

@@ -7,6 +7,9 @@ const express_1 = __importDefault(require("express")); //ESModules
 // const express = require('expres') → Commonjs
 const router = express_1.default.Router();
 router.get('/', (_req, res) => {
-    res.send("Este endpoint es el Index");
+    res.send("Este endpoint es el /Endpoints");
+});
+router.post('/', (_req, res) => {
+    res.send('Realizando POST');
 });
 exports.default = router;
