@@ -10,8 +10,7 @@ function validatorHandler(schema, property) {
     return (req, _res, next) => {
         //La información puede venir de distintos lugares dependiendo el request (get, post, put...)
         const data = req[property];
-        console.log(schema);
-        const { error } = schema.validate(data);
+        const { error } = schema.validate(data, { abortEarly: false });
         if (error) {
             next(boom_1.default.badRequest(error));
         }

@@ -24,6 +24,7 @@ class ZabbixService {
     }
     create(data) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log("Ejecutando create en zabbixServices.ts");
             const newZabbixAlert = Object.assign({}, data);
             this.listZabbix.push(newZabbixAlert);
             return newZabbixAlert;
@@ -31,6 +32,7 @@ class ZabbixService {
     }
     find() {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log("Ejecutando find en zabbixServices.ts");
             return new Promise((resolve, _reject) => {
                 setTimeout(() => {
                     resolve(this.listZabbix);
@@ -40,10 +42,9 @@ class ZabbixService {
     }
     findOne(time) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log("Ejecutando findOne en zabbixServices.ts");
             const parseTime = Number(time);
-            const alertaZabbix = yield this.listZabbix.find(item => item.Time === parseTime);
-            console.log("alertaZabbix es tipo:", typeof (alertaZabbix));
-            console.log("Jujuuu el profe Guss");
+            const alertaZabbix = yield this.listZabbix.find(item => item.time === parseTime);
             if (alertaZabbix == null) {
                 throw boom_1.default.notFound('Alerta Zabbix NO encontrada!');
             }
@@ -54,8 +55,9 @@ class ZabbixService {
     }
     update(time, changes) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log("Ejecutando update en zabbixServices.ts");
             const parseTime = Number(time);
-            const index = yield this.listZabbix.findIndex(item => item.Time === parseTime);
+            const index = yield this.listZabbix.findIndex(item => item.time === parseTime);
             if (index === -1) {
                 throw boom_1.default.notFound('Novedad no existe');
             }
@@ -69,7 +71,8 @@ class ZabbixService {
     }
     delete(time) {
         return __awaiter(this, void 0, void 0, function* () {
-            const index = yield this.listZabbix.findIndex(item => item.Time == time);
+            const index = yield this.listZabbix.findIndex(item => item.time == time);
+            console.log("Ejecutando delete en zabbixServices.ts");
             if (index === -1) {
                 throw boom_1.default.notFound("Alerta no encontrada");
             }

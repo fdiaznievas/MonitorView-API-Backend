@@ -16,16 +16,16 @@ const express_1 = __importDefault(require("express")); //ESModules
 // const express = require('expres') → Commonjs
 const zabbixServices_1 = __importDefault(require("../services/zabbixServices"));
 const validator_handler_1 = require("../middlewares/validator.handler");
-const schemas_1 = __importDefault(require("../schemas/schemas"));
-const schemas_2 = __importDefault(require("../schemas/schemas"));
-const schemas_3 = __importDefault(require("../schemas/schemas"));
+const zabbix_schema_1 = __importDefault(require("../schemas/zabbix.schema"));
+const zabbix_schema_2 = __importDefault(require("../schemas/zabbix.schema"));
+const zabbix_schema_3 = __importDefault(require("../schemas/zabbix.schema"));
 const router = express_1.default.Router();
 const service = new zabbixServices_1.default();
 router.get('/', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const zabbix = yield service.find();
     res.json(zabbix);
 }));
-router.get('/:time', (0, validator_handler_1.validatorHandler)(schemas_3.default.getSchema, 'params'), (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+router.get('/:time', (0, validator_handler_1.validatorHandler)(zabbix_schema_3.default.getSchema, 'params'), (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         console.log("Ejecuto middleware .get de zabbixRoutes");
         const { time } = req.params;
@@ -49,12 +49,12 @@ router.get('/', (req, res) => {
         res.send("No se enviaron parámetros");
     }
 });
-router.post('/', (0, validator_handler_1.validatorHandler)(schemas_1.default.createSchema, 'body'), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.post('/', (0, validator_handler_1.validatorHandler)(zabbix_schema_1.default.createSchema, 'body'), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const body = req.body;
     const newZabbixAlert = yield service.create(body);
     res.status(201).json(newZabbixAlert);
 }));
-router.patch('/:time', (0, validator_handler_1.validatorHandler)(schemas_3.default.getSchema, 'params'), (0, validator_handler_1.validatorHandler)(schemas_2.default, 'body'), (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+router.patch('/:time', (0, validator_handler_1.validatorHandler)(zabbix_schema_3.default.getSchema, 'params'), (0, validator_handler_1.validatorHandler)(zabbix_schema_2.default.updateSchema, 'body'), (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { time } = req.params;
         const body = req.body;
@@ -65,9 +65,16 @@ router.patch('/:time', (0, validator_handler_1.validatorHandler)(schemas_3.defau
         next(error);
     }
 }));
-router.delete('/:time', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { time } = req.params;
-    const deleteAlert = yield service.delete(time);
-    res.json(deleteAlert);
+router.delete('/:time', 
+//validatorHandler(deleteSchema.deleteSchema, 'params')
+(req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { time } = req.params;
+        const deleteAlert = yield service.delete(time);
+        res.json(deleteAlert);
+    }
+    catch (error) {
+        next(error);
+    }
 }));
 exports.default = router;

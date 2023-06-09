@@ -3,14 +3,12 @@ import express from 'express'; //ESModules
 import ZabbixService from '../services/zabbixServices';
 
 import { validatorHandler } from '../middlewares/validator.handler';
-import createSchema from '../schemas/schemas'
-import updateSchema from '../schemas/schemas'
-import getSchema from '../schemas/schemas'
-
+import createSchema from '../schemas/zabbix.schema'
+import updateSchema from '../schemas/zabbix.schema'
+import getSchema from '../schemas/zabbix.schema'
 
 const router = express.Router();
 const service = new ZabbixService();
-
 
 router.get('/', async (_req, res) => {
   const zabbix = await service.find();
@@ -56,7 +54,7 @@ router.post('/',
 
 router.patch('/:time',
   validatorHandler(getSchema.getSchema, 'params'),
-  validatorHandler(updateSchema, 'body'),
+  validatorHandler(updateSchema.updateSchema, 'body'),
   async (req, res, next) => {
     try {
       const { time } = req.params;
@@ -69,11 +67,18 @@ router.patch('/:time',
   }
 );
 
-router.delete('/:time', async (req, res) => {
-  const { time } = req.params;
-  const deleteAlert = await service.delete(time);
-  res.json(deleteAlert)
-}
+router.delete('/:time',
+  //validatorHandler(deleteSchema.deleteSchema, 'params')
+  async (req, res, next) => {
+    try {
+      const { time } = req.params;
+      const deleteAlert = await service.delete(time);
+      res.json(deleteAlert)
+    } catch (error) {
+      next(error);
+    }
+
+  }
 );
 
 export default router

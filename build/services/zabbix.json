@@ -1,41 +1,42 @@
 [
     {
-        "Severity": "Medium",
-        "Time": 13,
-        "Status": "PROBLEM",
-        "Host": "CordiezGuinazu_CCTV",
-        "Problem": "Prevencion Fraude - CCTV - No disponible por ping ICMP DIA",
-        "Duration": "4m 46s",
-        "Ack": "No",
-        "Actions": "Actions (1)"
+        "severity": "Medium",
+        "time": 13,
+        "status": "PROBLEM",
+        "host": "CordiezGuinazu_CCTV",
+        "problem": "Prevencion Fraude - CCTV - No disponible por ping ICMP DIA",
+        "duration": "4m 46s",
+        "ack": "No",
+        "actions": "Actions (1)"
     },
     {
-        "Severity": "Medium",
-        "Time": 12,
-        "Status": "PROBLEM",
-        "Host": "IVECO5_ATM-ISLA_Ro",
-        "Problem": "Monitoreo - No disponible por ping ICMP",
-        "Duration": "48m 48s",
-        "Ack": "No"
+        "severity": "Medium",
+        "time": 12,
+        "status": "PROBLEM",
+        "host": "IVECO5_ATM-ISLA_Ro",
+        "problem": "Monitoreo - No disponible por ping ICMP",
+        "duration": "48m 48s",
+        "ack": "No",
+        "actions": "None"
     },
     {
-        "Severity": "Medium",
-        "Time": 11,
-        "Status": "PROBLEM",
-        "Host": "CALCHIN",
-        "Problem": "Prevencion Fraude - CCTV - No disponible por ping ICMP DIA",
-        "Duration": "7h 38m 17s",
-        "Ack": "No",
-        "Actions": "Messages (1), Actions (2)"
+        "severity": "Medium",
+        "time": 11,
+        "status": "PROBLEM",
+        "host": "CALCHIN",
+        "problem": "Prevencion Fraude - CCTV - No disponible por ping ICMP DIA",
+        "duration": "7h 38m 17s",
+        "ack": "No",
+        "actions": "Messages (1), Actions (2)"
     },
     {
-        "Severity": "Medium",
-        "Time": 10,
-        "Status": "PROBLEM",
-        "Host": "ATMMovil2_CCTV",
-        "Problem": "Prevencion Fraude - CCTV - No disponible por ping ICMP DIA",
-        "Duration": "7h 38m 25s",
-        "Ack": "No",
-        "Actions": "Messages (1), Actions (2)"
+        "severity": "Medium",
+        "time": 10,
+        "status": "PROBLEM",
+        "host": "ATMMovil2_CCTV",
+        "problem": "Prevencion Fraude - CCTV - No disponible por ping ICMP DIA",
+        "duration": "7h 38m 25s",
+        "ack": "No",
+        "actions": "Messages (1), Actions (2)"
     }
 ]

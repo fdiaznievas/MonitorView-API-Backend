@@ -24,8 +24,14 @@ const createSchema = joi.object({
 });
 
 const updateSchema = joi.object({
+  severity: severity,
   time: time.required(),
-  host: host.required()
+  status: status,
+  host: host.required(),
+  problem: problem,
+  duration: duration,
+  ack: ack,
+  actions: actions
 });
 
 const getSchema = joi.object({

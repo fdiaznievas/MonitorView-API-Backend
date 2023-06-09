@@ -2,6 +2,10 @@ import express from 'express'; //ESModules
 // const express = require('expres') → Commonjs
 import ContactosService from '../services/contactosServices';
 
+import { validatorHandler } from '../middlewares/validator.handler';
+import createSchema from '../schemas/contactos.schema'
+import updateSchema from '../schemas/contactos.schema'
+import getSchema from '../schemas/contactos.schema'
 
 const router = express.Router();
 const service = new ContactosService();

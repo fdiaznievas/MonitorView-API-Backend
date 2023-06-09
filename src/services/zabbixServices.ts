@@ -17,6 +17,7 @@ class ZabbixService {
   }
 
   async create(data:any){
+    console.log("Ejecutando create en zabbixServices.ts")
     const newZabbixAlert= {
       ... data
     }
@@ -25,6 +26,7 @@ class ZabbixService {
   }
 
   async find() {
+    console.log("Ejecutando find en zabbixServices.ts")
     return new Promise( (resolve, _reject) => {
       setTimeout( () => {
         resolve(this.listZabbix);
@@ -33,10 +35,9 @@ class ZabbixService {
   }
 
   async findOne(time:string) {
+    console.log("Ejecutando findOne en zabbixServices.ts")
     const parseTime = Number(time)
-    const alertaZabbix:Object | undefined = await this.listZabbix.find(item => item.Time === parseTime);
-    console.log("alertaZabbix es tipo:", typeof(alertaZabbix))
-    console.log("Jujuuu el profe Guss")
+    const alertaZabbix:Object | undefined = await this.listZabbix.find(item => item.time === parseTime);
     if (alertaZabbix == null) {
       throw boom.notFound('Alerta Zabbix NO encontrada!');
     }
@@ -46,8 +47,9 @@ class ZabbixService {
   }
 
   async update(time:any, changes:any) {
+    console.log("Ejecutando update en zabbixServices.ts")
     const parseTime:number = Number(time)
-    const index = await this.listZabbix.findIndex(item => item.Time === parseTime);
+    const index = await this.listZabbix.findIndex(item => item.time === parseTime);
 
     if (index === -1) {
       throw boom.notFound('Novedad no existe')
@@ -63,8 +65,8 @@ class ZabbixService {
   }
 
   async delete(time:any) {
-    const index = await this.listZabbix.findIndex(item => item.Time == time);
-
+    const index = await this.listZabbix.findIndex(item => item.time == time);
+    console.log("Ejecutando delete en zabbixServices.ts")
     if (index === -1) {
       throw boom.notFound("Alerta no encontrada")
     }
