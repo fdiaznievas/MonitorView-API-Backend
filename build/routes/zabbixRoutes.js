@@ -15,16 +15,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express")); //ESModules
 // const express = require('expres') → Commonjs
 const zabbixServices_1 = __importDefault(require("../services/zabbixServices"));
+const validator_handler_1 = require("../middlewares/validator.handler");
+const schemas_1 = __importDefault(require("../schemas/schemas"));
+const schemas_2 = __importDefault(require("../schemas/schemas"));
+const schemas_3 = __importDefault(require("../schemas/schemas"));
 const router = express_1.default.Router();
 const service = new zabbixServices_1.default();
 router.get('/', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const zabbix = yield service.find();
     res.json(zabbix);
 }));
-router.get('/:timeId', (_req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+router.get('/:time', (0, validator_handler_1.validatorHandler)(schemas_3.default.getSchema, 'params'), (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { timeId } = _req.params;
-        const zabbix = yield service.findOne(timeId);
+        console.log("Ejecuto middleware .get de zabbixRoutes");
+        const { time } = req.params;
+        const zabbix = yield service.findOne(time);
         res.json(zabbix);
     }
     catch (error) {
@@ -44,16 +49,21 @@ router.get('/', (req, res) => {
         res.send("No se enviaron parámetros");
     }
 });
-router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.post('/', (0, validator_handler_1.validatorHandler)(schemas_1.default.createSchema, 'body'), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const body = req.body;
     const newZabbixAlert = yield service.create(body);
     res.status(201).json(newZabbixAlert);
 }));
-router.patch('/:time', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { time } = req.params;
-    const body = req.body;
-    const alertaZabbix = yield service.update(time, body);
-    res.json(alertaZabbix);
+router.patch('/:time', (0, validator_handler_1.validatorHandler)(schemas_3.default.getSchema, 'params'), (0, validator_handler_1.validatorHandler)(schemas_2.default, 'body'), (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { time } = req.params;
+        const body = req.body;
+        const alertaZabbix = yield service.update(time, body);
+        res.json(alertaZabbix);
+    }
+    catch (error) {
+        next(error);
+    }
 }));
 router.delete('/:time', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { time } = req.params;

@@ -1,18 +1,11 @@
 import { isBoom, Boom, boomify } from "@hapi/boom";
 
 export function logErrors( err:any, _req:any, res:any, next:any) {
-  console.log('logErrors');
+  console.log('logErrors: Ejecutando error.handler.ts');
   console.error(err);
   next(err);
 }
 
-export function errorHandler( err:any, _req:any, res:any, next:any) {
-  if (err.Boom) {
-    const { output } = err;
-    res.status(output.statusCode).json(output.payload);
-  }
-  res.send("No hay error")
-}
 
 export function boomErrorHandler( err:any, _req:any, res:any, next:any) {
   if (err.isBoom) {
@@ -23,4 +16,12 @@ export function boomErrorHandler( err:any, _req:any, res:any, next:any) {
   else {
     next(err);
   }
+}
+
+export function errorHandler( err:any, _req:any, res:any, next:any) {
+  if (err.Boom) {
+    const { output } = err;
+    res.status(output.statusCode).json(output.payload);
+  }
+  res.send("No hay error")
 }

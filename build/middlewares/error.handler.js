@@ -1,20 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.boomErrorHandler = exports.errorHandler = exports.logErrors = void 0;
+exports.errorHandler = exports.boomErrorHandler = exports.logErrors = void 0;
 function logErrors(err, _req, res, next) {
-    console.log('logErrors');
+    console.log('logErrors: Ejecutando error.handler.ts');
     console.error(err);
     next(err);
 }
 exports.logErrors = logErrors;
-function errorHandler(err, _req, res, next) {
-    if (err.Boom) {
-        const { output } = err;
-        res.status(output.statusCode).json(output.payload);
-    }
-    res.send("No hay error");
-}
-exports.errorHandler = errorHandler;
 function boomErrorHandler(err, _req, res, next) {
     if (err.isBoom) {
         const { output } = err;
@@ -26,3 +18,11 @@ function boomErrorHandler(err, _req, res, next) {
     }
 }
 exports.boomErrorHandler = boomErrorHandler;
+function errorHandler(err, _req, res, next) {
+    if (err.Boom) {
+        const { output } = err;
+        res.status(output.statusCode).json(output.payload);
+    }
+    res.send("No hay error");
+}
+exports.errorHandler = errorHandler;
