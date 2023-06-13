@@ -37,6 +37,7 @@ class ZabbixService {
                 setTimeout(() => {
                     resolve(this.listZabbix);
                 }, 100);
+                console.log("Se ejecutó un setTimeout");
             });
         });
     }
@@ -64,6 +65,22 @@ class ZabbixService {
             else {
                 const objNovedad = this.listZabbix[index];
                 this.listZabbix[index] = Object.assign(Object.assign({}, objNovedad), changes);
+            }
+            ;
+            return this.listZabbix[index];
+        });
+    }
+    replace(time, changes) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log("Ejecutando replace en zabbixServices.ts");
+            const parseTime = Number(time);
+            const index = yield this.listZabbix.findIndex(item => item.time === parseTime);
+            if (index === -1) {
+                throw boom_1.default.notFound('Novedad no existe');
+            }
+            else {
+                const objNovedad = this.listZabbix[index];
+                this.listZabbix[index] = Object.assign({ "time": parseTime }, changes);
             }
             ;
             return this.listZabbix[index];

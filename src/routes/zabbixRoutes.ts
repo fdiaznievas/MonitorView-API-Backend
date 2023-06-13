@@ -6,6 +6,7 @@ import { validatorHandler } from '../middlewares/validator.handler';
 import createSchema from '../schemas/zabbix.schema'
 import updateSchema from '../schemas/zabbix.schema'
 import getSchema from '../schemas/zabbix.schema'
+import replaceSchema from '../schemas/zabbix.schema'
 
 const router = express.Router();
 const service = new ZabbixService();
@@ -60,6 +61,21 @@ router.patch('/:time',
       const { time } = req.params;
       const body = req.body;
       const alertaZabbix = await service.update(time, body);
+      res.json(alertaZabbix);
+    } catch(error) {
+      next(error)
+    }
+  }
+);
+
+router.put('/:time',
+  validatorHandler(getSchema.getSchema, 'params'),
+  validatorHandler(replaceSchema.replaceSchema, 'body'),
+  async (req, res, next) => {
+    try {
+      const { time } = req.params;
+      const body = req.body;
+      const alertaZabbix = await service.replace(time, body);
       res.json(alertaZabbix);
     } catch(error) {
       next(error)

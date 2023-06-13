@@ -31,6 +31,7 @@ class ZabbixService {
       setTimeout( () => {
         resolve(this.listZabbix);
       }, 100);
+      console.log("Se ejecutó un setTimeout")
     })
   }
 
@@ -58,6 +59,24 @@ class ZabbixService {
       const objNovedad = this.listZabbix[index];
       this.listZabbix[index] = {
         ...objNovedad,
+        ...changes
+      };
+    };
+    return this.listZabbix[index];
+  }
+
+  async replace(time:any, changes:any) {
+    console.log("Ejecutando replace en zabbixServices.ts")
+    const parseTime:number = Number(time)
+    const index = await this.listZabbix.findIndex(item => item.time === parseTime);
+
+    if (index === -1) {
+      throw boom.notFound('Novedad no existe')
+    }
+    else {
+      const objNovedad = this.listZabbix[index];
+      this.listZabbix[index] = {
+        "time": parseTime,
         ...changes
       };
     };

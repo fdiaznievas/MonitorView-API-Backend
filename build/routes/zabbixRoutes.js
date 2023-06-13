@@ -19,6 +19,7 @@ const validator_handler_1 = require("../middlewares/validator.handler");
 const zabbix_schema_1 = __importDefault(require("../schemas/zabbix.schema"));
 const zabbix_schema_2 = __importDefault(require("../schemas/zabbix.schema"));
 const zabbix_schema_3 = __importDefault(require("../schemas/zabbix.schema"));
+const zabbix_schema_4 = __importDefault(require("../schemas/zabbix.schema"));
 const router = express_1.default.Router();
 const service = new zabbixServices_1.default();
 router.get('/', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -59,6 +60,17 @@ router.patch('/:time', (0, validator_handler_1.validatorHandler)(zabbix_schema_3
         const { time } = req.params;
         const body = req.body;
         const alertaZabbix = yield service.update(time, body);
+        res.json(alertaZabbix);
+    }
+    catch (error) {
+        next(error);
+    }
+}));
+router.put('/:time', (0, validator_handler_1.validatorHandler)(zabbix_schema_3.default.getSchema, 'params'), (0, validator_handler_1.validatorHandler)(zabbix_schema_4.default.replaceSchema, 'body'), (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { time } = req.params;
+        const body = req.body;
+        const alertaZabbix = yield service.replace(time, body);
         res.json(alertaZabbix);
     }
     catch (error) {

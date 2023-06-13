@@ -6,11 +6,11 @@ export function logErrors( err:any, _req:any, res:any, next:any) {
   next(err);
 }
 
-
 export function boomErrorHandler( err:any, _req:any, res:any, next:any) {
   if (err.isBoom) {
     const { output } = err;
     res.status(output.statusCode).json(output.payload); // Información del Error output.payload
+
   }
   // ↓ Con esto ↓ corrijo el error: "cannot set headers after they are sent to the client"
   else {

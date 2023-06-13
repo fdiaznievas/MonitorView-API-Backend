@@ -19,17 +19,25 @@ const createSchema = joi_1.default.object({
     time: time.required(),
     status: status,
     host: host.required(),
-    problem: problem,
+    problem: problem.required(),
     duration: duration,
     ack: ack,
     actions: actions
 });
 const updateSchema = joi_1.default.object({
     severity: severity,
-    time: time.required(),
+    status: status,
+    host: host,
+    problem: problem,
+    duration: duration,
+    ack: ack,
+    actions: actions
+});
+const replaceSchema = joi_1.default.object({
+    severity: severity,
     status: status,
     host: host.required(),
-    problem: problem,
+    problem: problem.required(),
     duration: duration,
     ack: ack,
     actions: actions
@@ -37,4 +45,4 @@ const updateSchema = joi_1.default.object({
 const getSchema = joi_1.default.object({
     time: time.required()
 });
-exports.default = { createSchema, updateSchema, getSchema };
+exports.default = { createSchema, updateSchema, replaceSchema, getSchema };
