@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const joi_1 = __importDefault(require("joi"));
 //const id = joi.string().uuid();
 //const name = joi.string().alphanum().min(3).max(15);
-const time = joi_1.default.number();
+const time = joi_1.default.number().strict();
 const host = joi_1.default.string();
 const severity = joi_1.default.string();
 const status = joi_1.default.string().alphanum();

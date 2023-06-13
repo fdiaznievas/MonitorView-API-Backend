@@ -2,7 +2,7 @@ import joi from 'joi'
 
 //const id = joi.string().uuid();
 //const name = joi.string().alphanum().min(3).max(15);
-const time = joi.number();
+const time = joi.number().strict();
 const host = joi.string();
 const severity = joi.string();
 const status = joi.string().alphanum();

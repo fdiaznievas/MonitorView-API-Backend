@@ -46,10 +46,14 @@ router.get('/', (req:any,res:any) => {
 
 router.post('/',
   validatorHandler(createSchema.createSchema, 'body'),
-  async (req, res) => {
-    const body = req.body;
-    const newZabbixAlert = await service.create(body);
-    res.status(201).json(newZabbixAlert)
+  async (req, res, next) => {
+    try {
+      const body = req.body;
+      const newZabbixAlert = await service.create(body);
+      res.status(201).json(newZabbixAlert)
+    } catch(error) {
+      next(error)
+    }
   }
 );
 

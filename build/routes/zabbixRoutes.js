@@ -50,10 +50,15 @@ router.get('/', (req, res) => {
         res.send("No se enviaron parámetros");
     }
 });
-router.post('/', (0, validator_handler_1.validatorHandler)(zabbix_schema_1.default.createSchema, 'body'), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const body = req.body;
-    const newZabbixAlert = yield service.create(body);
-    res.status(201).json(newZabbixAlert);
+router.post('/', (0, validator_handler_1.validatorHandler)(zabbix_schema_1.default.createSchema, 'body'), (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const body = req.body;
+        const newZabbixAlert = yield service.create(body);
+        res.status(201).json(newZabbixAlert);
+    }
+    catch (error) {
+        next(error);
+    }
 }));
 router.patch('/:time', (0, validator_handler_1.validatorHandler)(zabbix_schema_3.default.getSchema, 'params'), (0, validator_handler_1.validatorHandler)(zabbix_schema_2.default.updateSchema, 'body'), (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
