@@ -1,4 +1,5 @@
 import express from 'express'; //ESModules
+import cors from 'cors';
 // const express = require('expres') → Commonjs
 
 import novedadesRoutes from './routes/novedadesRoutes';
@@ -16,6 +17,18 @@ const PORT = 3005;
 const router = express.Router();
 
 app.use(express.json()) //middleware que transforma la req.body a un json
+
+const whitelist = ['http://localhost:4202']
+const options = {
+  origin: (origin, callback) => {
+    if (whitelist.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Conexión no permitida"));
+    }
+  }
+}
+app.use(cors());
 app.use('/api/v1', router) //middleware (???)
 
 // ***************** ENDPOINTS ***************** //
