@@ -20,7 +20,7 @@ app.use(express.json()) //middleware que transforma la req.body a un json
 
 const whitelist = ['http://localhost:4202']
 const options = {
-  origin: (origin, callback) => {
+  origin: (origin:string, callback:any) => {
     if (whitelist.includes(origin)) {
       callback(null, true);
     } else {

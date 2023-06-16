@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express")); //ESModules
+const cors_1 = __importDefault(require("cors"));
 // const express = require('expres') → Commonjs
 const novedadesRoutes_1 = __importDefault(require("./routes/novedadesRoutes"));
 const endpointRoutes_1 = __importDefault(require("./routes/endpointRoutes"));
@@ -16,6 +17,18 @@ const app = (0, express_1.default)();
 const PORT = 3005;
 const router = express_1.default.Router();
 app.use(express_1.default.json()); //middleware que transforma la req.body a un json
+const whitelist = ['http://localhost:4202'];
+const options = {
+    origin: (origin, callback) => {
+        if (whitelist.includes(origin)) {
+            callback(null, true);
+        }
+        else {
+            callback(new Error("Conexión no permitida"));
+        }
+    }
+};
+app.use((0, cors_1.default)());
 app.use('/api/v1', router); //middleware (???)
 // ***************** ENDPOINTS ***************** //
 router.get('/', indexRoutes_1.default);

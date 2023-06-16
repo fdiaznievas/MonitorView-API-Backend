@@ -1,5 +1,7 @@
-import zabbixDatos from './zabbix.json'
-import boom from '@hapi/boom'
+import zabbixDatos from './zabbix.json';
+import boom from '@hapi/boom';
+
+import { getConnection } from '../libs/postgres';
 
 const zabbix = zabbixDatos;
 

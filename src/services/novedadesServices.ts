@@ -1,5 +1,7 @@
 import novedadesDatos from './novedades.json'
 
+import { getConnection } from '../libs/postgres';
+
 const novedades = novedadesDatos
 
 class NovedadesService {
@@ -23,7 +25,9 @@ class NovedadesService {
   }
 
   async find() {
-    return this.listNovedades;
+    const client = await getConnection();
+    const rta = await client.query('SELECT * FROM novedades')
+    return rta.rows
   }
 
   async findOne(id:any) {
