@@ -1,6 +1,7 @@
 import zabbixDatos from './zabbix.json';
 import boom from '@hapi/boom';
 
+import { sequelize } from '../libs/sequelize';
 import { getConnection } from '../libs/postgres';
 
 const zabbix = zabbixDatos;
@@ -28,14 +29,20 @@ class ZabbixService {
   }
 
   async find() {
-    console.log("Ejecutando find en zabbixServices.ts")
-    return new Promise( (resolve, _reject) => {
-      setTimeout( () => {
-        resolve(this.listZabbix);
-      }, 100);
-      console.log("Se ejecutó un setTimeout")
-    })
+    const query = 'SELECT * from zabbix';
+    const [data] = await sequelize.query(query)
+    return data;
   }
+
+  // {
+  //   console.log("Ejecutando find en zabbixServices.ts")
+  //   return new Promise( (resolve, _reject) => {
+  //     setTimeout( () => {
+  //       resolve(this.listZabbix);
+  //     }, 100);
+  //     console.log("Se ejecutó un setTimeout")
+  //   })
+  // }
 
   async findOne(time:string) {
     console.log("Ejecutando findOne en zabbixServices.ts")

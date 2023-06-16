@@ -1,14 +1,17 @@
 import novedadesDatos from './novedades.json'
 
+import { pool } from '../libs/postgres.pool';
 import { getConnection } from '../libs/postgres';
 
 const novedades = novedadesDatos
 
 class NovedadesService {
   listNovedades;
+  pool;
 
   constructor() {
     this.listNovedades = novedades;
+    this.pool = pool;
     this.generate();
   }
 
@@ -25,8 +28,8 @@ class NovedadesService {
   }
 
   async find() {
-    const client = await getConnection();
-    const rta = await client.query('SELECT * FROM novedades')
+    const query = 'SELECT * from zabbix';
+    const rta = await this.pool.query(query)
     return rta.rows
   }
 

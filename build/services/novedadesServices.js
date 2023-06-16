@@ -13,10 +13,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const novedades_json_1 = __importDefault(require("./novedades.json"));
+const postgres_pool_1 = require("../libs/postgres.pool");
 const novedades = novedades_json_1.default;
 class NovedadesService {
     constructor() {
         this.listNovedades = novedades;
+        this.pool = postgres_pool_1.pool;
         this.generate();
     }
     generate() {
@@ -30,7 +32,9 @@ class NovedadesService {
     }
     find() {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.listNovedades;
+            const query = 'SELECT * from zabbix';
+            const rta = yield this.pool.query(query);
+            return rta.rows;
         });
     }
     findOne(id) {

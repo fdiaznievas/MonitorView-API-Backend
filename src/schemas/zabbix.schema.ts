@@ -2,7 +2,7 @@ import joi from 'joi'
 
 //const id = joi.string().uuid();
 //const name = joi.string().alphanum().min(3).max(15);
-const time = joi.number().strict();
+const time_ = joi.number().strict();
 const host = joi.string();
 const severity = joi.string();
 const status = joi.string().alphanum();
@@ -11,10 +11,9 @@ const duration = joi.string();
 const ack = joi.string();
 const actions = joi.string();
 
-
 const createSchema = joi.object({
   severity: severity,
-  time: time.required(),
+  time_: time_.required(),
   status: status,
   host: host.required(),
   problem: problem.required(),
@@ -44,7 +43,7 @@ const replaceSchema = joi.object({
 });
 
 const getSchema = joi.object({
-  time: time.required()
+  time: time_.required()
 });
 
 

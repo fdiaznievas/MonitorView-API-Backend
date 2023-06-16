@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const zabbix_json_1 = __importDefault(require("./zabbix.json"));
 const boom_1 = __importDefault(require("@hapi/boom"));
+const sequelize_1 = require("../libs/sequelize");
 const zabbix = zabbix_json_1.default;
 class ZabbixService {
     constructor() {
@@ -32,15 +33,20 @@ class ZabbixService {
     }
     find() {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("Ejecutando find en zabbixServices.ts");
-            return new Promise((resolve, _reject) => {
-                setTimeout(() => {
-                    resolve(this.listZabbix);
-                }, 100);
-                console.log("Se ejecutó un setTimeout");
-            });
+            const query = 'SELECT * from zabbix';
+            const [data] = yield sequelize_1.sequelize.query(query);
+            return data;
         });
     }
+    // {
+    //   console.log("Ejecutando find en zabbixServices.ts")
+    //   return new Promise( (resolve, _reject) => {
+    //     setTimeout( () => {
+    //       resolve(this.listZabbix);
+    //     }, 100);
+    //     console.log("Se ejecutó un setTimeout")
+    //   })
+    // }
     findOne(time) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log("Ejecutando findOne en zabbixServices.ts");
