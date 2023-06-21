@@ -5,8 +5,8 @@ services:
     image: postgres:13
     environment:
       - POSTGRES_DB=monitor_view
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=adminPostgres,2023
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=admin123
     ports:
       - 5432:5432
     volumes:
@@ -16,6 +16,26 @@ services:
     image: dpage/pgadmin4
     environment:
       - PGADMIN_DEFAULT_EMAIL=admin@mail.com
-      - PGADMIN_DEFAULT_PASSWORD=pgadmin,2023
+      - PGADMIN_DEFAULT_PASSWORD=admin123
     ports:
       - 5433:80
+
+  mysql:
+    image: mysql:5
+    environment:
+      - MYSQL_DATABASE=monitor_view
+      - MYSQL_ROOT_USER=root
+      - MYSQL_ROOT_PASSWORD=admin123
+      - MYSQL_PORT=3306
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin123
+      - PMA_HOST=mysql
+    ports:
+     - 8080:80

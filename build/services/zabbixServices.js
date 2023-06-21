@@ -25,17 +25,21 @@ class ZabbixService {
     }
     create(data) {
         return __awaiter(this, void 0, void 0, function* () {
+            const newUser = yield sequelize_1.sequelize.models.Zabbix.create(data);
             console.log("Ejecutando create en zabbixServices.ts");
-            const newZabbixAlert = Object.assign({}, data);
-            this.listZabbix.push(newZabbixAlert);
-            return newZabbixAlert;
+            return newUser;
+            // ↓↓ TODO ESTO SE APLICABA ANTES DE SEQUELIZE ↓↓
+            // const newZabbixAlert= {
+            //   ... data
+            // }
+            // this.listZabbix.push(newZabbixAlert);
+            // return newZabbixAlert;
         });
     }
     find() {
         return __awaiter(this, void 0, void 0, function* () {
-            const query = 'SELECT * from zabbix';
-            const [data] = yield sequelize_1.sequelize.query(query);
-            return data;
+            const rta = yield sequelize_1.sequelize.models.Zabbix.findAll();
+            return rta;
         });
     }
     // {
@@ -47,33 +51,43 @@ class ZabbixService {
     //     console.log("Se ejecutó un setTimeout")
     //   })
     // }
-    findOne(time) {
+    findOne(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("Ejecutando findOne en zabbixServices.ts");
-            const parseTime = Number(time);
-            const alertaZabbix = yield this.listZabbix.find(item => item.time === parseTime);
-            if (alertaZabbix == null) {
-                throw boom_1.default.notFound('Alerta Zabbix NO encontrada!');
+            const user = yield sequelize_1.sequelize.models.Zabbix.findByPk(id);
+            if (!user) {
+                throw boom_1.default.notFound('user not found');
             }
-            else {
-                return alertaZabbix;
-            }
+            return user;
+            // console.log("Ejecutando findOne en zabbixServices.ts")
+            // const parseTime = Number(time)
+            // const alertaZabbix:Object | undefined = await this.listZabbix.find(item => item.time === parseTime);
+            // if (alertaZabbix == null) {
+            //   throw boom.notFound('Alerta Zabbix NO encontrada!');
+            // }
+            // else {
+            //   return alertaZabbix;
+            // }
         });
     }
-    update(time, changes) {
+    update(id, changes) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("Ejecutando update en zabbixServices.ts");
-            const parseTime = Number(time);
-            const index = yield this.listZabbix.findIndex(item => item.time === parseTime);
-            if (index === -1) {
-                throw boom_1.default.notFound('Novedad no existe');
-            }
-            else {
-                const objNovedad = this.listZabbix[index];
-                this.listZabbix[index] = Object.assign(Object.assign({}, objNovedad), changes);
-            }
-            ;
-            return this.listZabbix[index];
+            const user = yield this.findOne(id);
+            const rta = yield user.update(changes);
+            return rta;
+            // console.log("Ejecutando update en zabbixServices.ts")
+            // const parseTime:number = Number(time)
+            // const index = await this.listZabbix.findIndex(item => item.time === parseTime);
+            // if (index === -1) {
+            //   throw boom.notFound('Novedad no existe')
+            // }
+            // else {
+            //   const objNovedad = this.listZabbix[index];
+            //   this.listZabbix[index] = {
+            //     ...objNovedad,
+            //     ...changes
+            //   };
+            // };
+            // return this.listZabbix[index];
         });
     }
     replace(time, changes) {
@@ -92,15 +106,18 @@ class ZabbixService {
             return this.listZabbix[index];
         });
     }
-    delete(time) {
+    delete(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const index = yield this.listZabbix.findIndex(item => item.time == time);
-            console.log("Ejecutando delete en zabbixServices.ts");
-            if (index === -1) {
-                throw boom_1.default.notFound("Alerta no encontrada");
-            }
-            this.listZabbix.splice(index, 1);
-            return { time };
+            const user = yield this.findOne(id);
+            yield user.destroy();
+            return { id };
+            // const index = await this.listZabbix.findIndex(item => item.time == time);
+            // console.log("Ejecutando delete en zabbixServices.ts")
+            // if (index === -1) {
+            //   throw boom.notFound("Alerta no encontrada")
+            // }
+            // this.listZabbix.splice(index,1)
+            // return { time };
         });
     }
 }

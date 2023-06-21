@@ -41,6 +41,7 @@ router.use('/users', usersRoutes_1.default);
 // ***************** /ENDPOINTS ***************** //
 // ***************** MIDDLEWARES ORDENADOS DE FORMA SECUENCIAL *****************//
 app.use(error_handler_1.logErrors);
+app.use(error_handler_1.sequelizeErrorHandler);
 app.use(error_handler_1.boomErrorHandler);
 app.use(error_handler_1.errorHandler);
 // ***************** /MIDDLEWARES ORDENADOS DE FORMA SECUENCIAL *****************//

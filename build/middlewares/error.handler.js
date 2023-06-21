@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.errorHandler = exports.boomErrorHandler = exports.logErrors = void 0;
+exports.errorHandler = exports.sequelizeErrorHandler = exports.boomErrorHandler = exports.logErrors = void 0;
+const sequelize_1 = require("sequelize");
 function logErrors(err, _req, res, next) {
     console.log('logErrors: Ejecutando error.handler.ts');
     console.error(err);
@@ -18,11 +19,22 @@ function boomErrorHandler(err, _req, res, next) {
     }
 }
 exports.boomErrorHandler = boomErrorHandler;
+function sequelizeErrorHandler(err, req, res, next) {
+    if (err instanceof sequelize_1.ValidationError) {
+        res.status(409).json({
+            statusCode: 409,
+            name: err.name,
+            errors: err.errors
+        });
+    }
+    next(err);
+}
+exports.sequelizeErrorHandler = sequelizeErrorHandler;
 function errorHandler(err, _req, res, next) {
     if (err.Boom) {
         const { output } = err;
         res.status(output.statusCode).json(output.payload);
     }
-    res.send("No hay error");
+    res.send("No hay error [errorHandler]");
 }
 exports.errorHandler = errorHandler;

@@ -16,13 +16,13 @@ router.get('/', async (_req, res) => {
   res.json(zabbix);
 })
 
-router.get('/:time',
+router.get('/:id',
   validatorHandler(getSchema.getSchema, 'params'),
   async (req, res, next) => {
     try {
       console.log("Ejecuto middleware .get de zabbixRoutes")
-      const { time } = req.params;
-      const zabbix = await service.findOne(time);
+      const { id } = req.params;
+      const zabbix = await service.findOne(id);
       res.json(zabbix)
     } catch (error) {
       next(error);
@@ -57,14 +57,14 @@ router.post('/',
   }
 );
 
-router.patch('/:time',
+router.patch('/:id',
   validatorHandler(getSchema.getSchema, 'params'),
   validatorHandler(updateSchema.updateSchema, 'body'),
   async (req, res, next) => {
     try {
-      const { time } = req.params;
+      const { id } = req.params;
       const body = req.body;
-      const alertaZabbix = await service.update(time, body);
+      const alertaZabbix = await service.update(id, body);
       res.json(alertaZabbix);
     } catch(error) {
       next(error)
@@ -72,14 +72,14 @@ router.patch('/:time',
   }
 );
 
-router.put('/:time',
+router.put('/:id',
   validatorHandler(getSchema.getSchema, 'params'),
   validatorHandler(replaceSchema.replaceSchema, 'body'),
   async (req, res, next) => {
     try {
-      const { time } = req.params;
+      const { id } = req.params;
       const body = req.body;
-      const alertaZabbix = await service.replace(time, body);
+      const alertaZabbix = await service.replace(id, body);
       res.json(alertaZabbix);
     } catch(error) {
       next(error)
@@ -87,12 +87,12 @@ router.put('/:time',
   }
 );
 
-router.delete('/:time',
+router.delete('/:id',
   //validatorHandler(deleteSchema.deleteSchema, 'params')
   async (req, res, next) => {
     try {
-      const { time } = req.params;
-      const deleteAlert = await service.delete(time);
+      const { id } = req.params;
+      const deleteAlert = await service.delete(id);
       res.json(deleteAlert)
     } catch (error) {
       next(error);

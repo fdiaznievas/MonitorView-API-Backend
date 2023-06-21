@@ -2,13 +2,14 @@ import joi from 'joi'
 
 //const id = joi.string().uuid();
 //const name = joi.string().alphanum().min(3).max(15);
-const time_ = joi.number().strict();
-const host = joi.string();
+const id = joi.number();
 const severity = joi.string();
+const time_ = joi.number().strict();
 const status = joi.string().alphanum();
+const host = joi.string();
 const problem = joi.string();
 const duration = joi.string();
-const ack = joi.string();
+const active = joi.boolean();
 const actions = joi.string();
 
 const createSchema = joi.object({
@@ -18,7 +19,7 @@ const createSchema = joi.object({
   host: host.required(),
   problem: problem.required(),
   duration: duration,
-  ack: ack,
+  active: active,
   actions: actions
 });
 
@@ -28,7 +29,7 @@ const updateSchema = joi.object({
   host: host,
   problem: problem,
   duration: duration,
-  ack: ack,
+  active: active,
   actions: actions
 });
 
@@ -38,12 +39,12 @@ const replaceSchema = joi.object({
   host: host.required(),
   problem: problem.required(),
   duration: duration,
-  ack: ack,
+  active: active,
   actions: actions
 });
 
 const getSchema = joi.object({
-  time: time_.required()
+  id: id.required() //No utilizo number().strict() para que también valide params numbers como string: ("2" == 2) → True
 });
 
 

@@ -1,4 +1,5 @@
 import { isBoom, Boom, boomify } from "@hapi/boom";
+import { ValidationError } from "sequelize";
 
 export function logErrors( err:any, _req:any, res:any, next:any) {
   console.log('logErrors: Ejecutando error.handler.ts');
@@ -18,10 +19,21 @@ export function boomErrorHandler( err:any, _req:any, res:any, next:any) {
   }
 }
 
+export function sequelizeErrorHandler(err:any, req:any, res:any, next:any) {
+  if(err instanceof ValidationError) {
+      res.status(409).json({
+          statusCode: 409,
+          name: err.name,
+          errors: err.errors
+      });
+  }
+  next(err);
+}
+
 export function errorHandler( err:any, _req:any, res:any, next:any) {
   if (err.Boom) {
     const { output } = err;
     res.status(output.statusCode).json(output.payload);
   }
-  res.send("No hay error")
+  res.send("No hay error [errorHandler]")
 }

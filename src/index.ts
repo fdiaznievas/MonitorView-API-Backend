@@ -9,7 +9,7 @@ import usersRoutes from './routes/usersRoutes';
 import indexRoutes from './routes/indexRoutes';
 import zabbixRoutes from './routes/zabbixRoutes';
 
-import { logErrors, errorHandler, boomErrorHandler } from './middlewares/error.handler';
+import { logErrors, errorHandler, boomErrorHandler, sequelizeErrorHandler } from './middlewares/error.handler';
 
 
 const app = express();
@@ -46,6 +46,7 @@ router.use('/users', usersRoutes);
 
 // ***************** MIDDLEWARES ORDENADOS DE FORMA SECUENCIAL *****************//
 app.use(logErrors);
+app.use(sequelizeErrorHandler);
 app.use(boomErrorHandler);
 app.use(errorHandler);
 // ***************** /MIDDLEWARES ORDENADOS DE FORMA SECUENCIAL *****************//
