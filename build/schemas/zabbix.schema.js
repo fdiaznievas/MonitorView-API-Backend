@@ -13,7 +13,7 @@ const status = joi_1.default.string().alphanum();
 const host = joi_1.default.string();
 const problem = joi_1.default.string();
 const duration = joi_1.default.string();
-const active = joi_1.default.boolean();
+const active = joi_1.default.boolean(); // →→ en MySql no 
 const actions = joi_1.default.string();
 const createSchema = joi_1.default.object({
     severity: severity,

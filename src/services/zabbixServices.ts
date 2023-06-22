@@ -1,7 +1,7 @@
 import zabbixDatos from './zabbix.json';
 import boom from '@hapi/boom';
 
-import { Zabbix } from './../db/models/zabbix.model';
+import { Zabbix } from '../db/models22/zabbix.model';
 
 import { sequelize } from '../libs/sequelize';
 import { getConnection } from '../libs/postgres';

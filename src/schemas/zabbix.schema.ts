@@ -9,7 +9,7 @@ const status = joi.string().alphanum();
 const host = joi.string();
 const problem = joi.string();
 const duration = joi.string();
-const active = joi.boolean();
+const active = joi.boolean(); // →→ en MySql no 
 const actions = joi.string();
 
 const createSchema = joi.object({
