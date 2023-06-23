@@ -1,45 +1,33 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Zabbix = exports.ZabbixSchema = exports.ZABBIX_TABLE = void 0;
+exports.Novedad = exports.NovedadSchema = exports.NOVEDAD_TABLE = void 0;
 const sequelize_1 = require("sequelize");
-exports.ZABBIX_TABLE = 'zabbixs';
-exports.ZabbixSchema = {
+exports.NOVEDAD_TABLE = 'novedades';
+exports.NovedadSchema = {
     id: {
         primaryKey: true,
         allowNull: false,
         autoIncrement: true,
         type: sequelize_1.DataTypes.INTEGER
     },
-    severity: {
-        allowNull: false,
-        type: sequelize_1.DataTypes.STRING
-    },
-    time_: {
+    caseId: {
         allowNull: false,
         type: sequelize_1.DataTypes.INTEGER,
         unique: true
     },
-    status: {
+    problemDate: {
+        allowNull: false,
+        type: sequelize_1.DataTypes.DATE
+    },
+    cid: {
+        allowNull: false,
+        type: sequelize_1.DataTypes.INTEGER
+    },
+    sitio: {
         allowNull: false,
         type: sequelize_1.DataTypes.STRING
     },
-    host: {
-        allowNull: false,
-        type: sequelize_1.DataTypes.STRING
-    },
-    problem: {
-        allowNull: false,
-        type: sequelize_1.DataTypes.STRING
-    },
-    duration: {
-        allowNull: false,
-        type: sequelize_1.DataTypes.STRING
-    },
-    active: {
-        allowNull: false,
-        type: sequelize_1.DataTypes.BOOLEAN
-    },
-    actions: {
+    description: {
         allowNull: false,
         type: sequelize_1.DataTypes.STRING
     },
@@ -48,19 +36,25 @@ exports.ZabbixSchema = {
         type: sequelize_1.DataTypes.DATE,
         field: 'create_at',
         defaultValue: sequelize_1.DataTypes.NOW
+    },
+    updatedAt: {
+        allowNull: false,
+        type: sequelize_1.DataTypes.DATE,
+        field: 'update_at',
+        defaultValue: sequelize_1.DataTypes.NOW
     }
 };
-class Zabbix extends sequelize_1.Model {
+class Novedad extends sequelize_1.Model {
     static associate() {
         //associate
     }
     static config(sequelize) {
         return {
             sequelize,
-            tableName: exports.ZABBIX_TABLE,
-            modelName: 'Zabbix',
+            tableName: exports.NOVEDAD_TABLE,
+            modelName: 'Novedad',
             timestamps: true
         };
     }
 }
-exports.Zabbix = Zabbix;
+exports.Novedad = Novedad;

@@ -48,6 +48,12 @@ exports.ZabbixSchema = {
         type: sequelize_1.DataTypes.DATE,
         field: 'create_at',
         defaultValue: sequelize_1.DataTypes.NOW
+    },
+    updatedAt: {
+        allowNull: false,
+        type: sequelize_1.DataTypes.DATE,
+        field: 'update_at',
+        defaultValue: sequelize_1.DataTypes.NOW
     }
 };
 class Zabbix extends sequelize_1.Model {

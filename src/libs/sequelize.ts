@@ -7,13 +7,12 @@ const USER = encodeURIComponent(config.dbUser || "undefined");
 const PASSWORD = encodeURIComponent(config.dbPassword || "undefined");
 const URI = `${dbEngine}://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`
 
-const sequelizeConnection = new Sequelize(URI, {
+const sequelize = new Sequelize(URI, {
   dialect: 'postgres',
   logging: true
 });
 
-setupModels(sequelizeConnection);
-
-export default sequelizeConnection;
+setupModels(sequelize);
+export default sequelize;
 
 // sequelize.sync() // { logging: console.log }  { alter:true } { force:true }

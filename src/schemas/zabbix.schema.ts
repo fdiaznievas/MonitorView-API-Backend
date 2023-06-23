@@ -9,7 +9,7 @@ const status = joi.string().alphanum();
 const host = joi.string();
 const problem = joi.string();
 const duration = joi.string();
-const active = joi.boolean(); // →→ en MySql no 
+const active = joi.boolean(); // →→ en MySql no
 const actions = joi.string();
 
 const createSchema = joi.object({
@@ -47,5 +47,9 @@ const getSchema = joi.object({
   id: id.required() //No utilizo number().strict() para que también valide params numbers como string: ("2" == 2) → True
 });
 
+const deleteSchema = joi.object({
+  id: id.required() //No utilizo number().strict() para que también valide params numbers como string: ("2" == 2) → True
+})
 
-export default { createSchema, updateSchema, replaceSchema, getSchema }
+
+export default { createSchema, updateSchema, replaceSchema, getSchema, deleteSchema }

@@ -23,6 +23,12 @@ export const UserSchema = {
     type: DataTypes.DATE,
     field: 'create_at',
     defaultValue: DataTypes.NOW
+  },
+  updatedAt: {
+    allowNull: false,
+    type: DataTypes.DATE,
+    field: 'update_at',
+    defaultValue: DataTypes.NOW
   }
 }
 

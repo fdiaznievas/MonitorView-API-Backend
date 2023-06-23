@@ -9,7 +9,10 @@
     "dev": "nodemon ./build/index.js",
     "lint": "eslint",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "migrations:generate": "sequelize-cli migration:generate --name"
+    "migrations:generate": "sequelize-cli migration:generate --name",
+    "migrations:run": "sequelize-cli db:migrate",
+    "migrations:revert": "sequelize-cli db:migrate:undo",
+    "migrations:delete": "sequelize-cli db:migrate:undo:all"
   },
   "keywords": [],
   "author": "",
@@ -24,7 +27,8 @@
     "mysql2": "^3.4.0",
     "pg": "^8.11.0",
     "promise-mysql": "^3.3.1",
-    "sequelize": "^6.32.0"
+    "sequelize": "^6.32.0",
+    "umzug": "^3.2.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.13",

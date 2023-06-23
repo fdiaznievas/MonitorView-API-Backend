@@ -12,20 +12,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const zabbix_json_1 = __importDefault(require("./zabbix.json"));
+// import zabbixDatos from './zabbix.json';
 const boom_1 = __importDefault(require("@hapi/boom"));
-const sequelize_1 = require("../libs/sequelize");
-const zabbix = zabbix_json_1.default;
+const sequelize_1 = __importDefault(require("../libs/sequelize"));
 class ZabbixService {
     constructor() {
-        this.listZabbix = zabbix;
         this.generate();
     }
     generate() {
     }
     create(data) {
         return __awaiter(this, void 0, void 0, function* () {
-            const newUser = yield sequelize_1.sequelize.models.Zabbix.create(data);
+            const newUser = yield sequelize_1.default.models.Zabbix.create(data);
             console.log("Ejecutando create en zabbixServices.ts");
             return newUser;
             // ↓↓ TODO ESTO SE APLICABA ANTES DE SEQUELIZE ↓↓
@@ -38,7 +36,7 @@ class ZabbixService {
     }
     find() {
         return __awaiter(this, void 0, void 0, function* () {
-            const rta = yield sequelize_1.sequelize.models.Zabbix.findAll();
+            const rta = yield sequelize_1.default.models.Zabbix.findAll();
             return rta;
         });
     }
@@ -53,7 +51,7 @@ class ZabbixService {
     // }
     findOne(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const user = yield sequelize_1.sequelize.models.Zabbix.findByPk(id);
+            const user = yield sequelize_1.default.models.Zabbix.findByPk(id);
             if (!user) {
                 throw boom_1.default.notFound('user not found');
             }
@@ -90,22 +88,22 @@ class ZabbixService {
             // return this.listZabbix[index];
         });
     }
-    replace(time, changes) {
-        return __awaiter(this, void 0, void 0, function* () {
-            console.log("Ejecutando replace en zabbixServices.ts");
-            const parseTime = Number(time);
-            const index = yield this.listZabbix.findIndex(item => item.time === parseTime);
-            if (index === -1) {
-                throw boom_1.default.notFound('Novedad no existe');
-            }
-            else {
-                const objNovedad = this.listZabbix[index];
-                this.listZabbix[index] = Object.assign({ "time": parseTime }, changes);
-            }
-            ;
-            return this.listZabbix[index];
-        });
-    }
+    // async replace(time:any, changes:any) {
+    //   console.log("Ejecutando replace en zabbixServices.ts")
+    //   const parseTime:number = Number(time)
+    //   const index = await this.listZabbix.findIndex(item => item.time === parseTime);
+    //   if (index === -1) {
+    //     throw boom.notFound('Novedad no existe')
+    //   }
+    //   else {
+    //     const objNovedad = this.listZabbix[index];
+    //     this.listZabbix[index] = {
+    //       "time": parseTime,
+    //       ...changes
+    //     };
+    //   };
+    //   return this.listZabbix[index];
+    // }
     delete(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const user = yield this.findOne(id);

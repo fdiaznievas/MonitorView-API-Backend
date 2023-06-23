@@ -1,44 +1,32 @@
 import { Model, DataTypes, Sequelize } from 'sequelize';
 
-export const ZABBIX_TABLE = 'zabbixs';
+export const NOVEDAD_TABLE = 'novedades';
 
-export const ZabbixSchema = {
+export const NovedadSchema = {
   id: {
     primaryKey: true,
     allowNull: false,
     autoIncrement: true,
     type: DataTypes.INTEGER
   },
-  severity: {
-    allowNull: false,
-    type: DataTypes.STRING
-  },
-  time_: {
+  caseId: {
     allowNull: false,
     type: DataTypes.INTEGER,
     unique: true
   },
-  status: {
+  problemDate: {
+    allowNull: false,
+    type: DataTypes.DATE
+  },
+  cid: {
+    allowNull: false,
+    type: DataTypes.INTEGER
+  },
+  sitio: {
     allowNull: false,
     type: DataTypes.STRING
   },
-  host: {
-    allowNull: false,
-    type: DataTypes.STRING
-  },
-  problem: {
-    allowNull: false,
-    type: DataTypes.STRING
-  },
-  duration: {
-    allowNull: false,
-    type: DataTypes.STRING
-  },
-  active: {
-    allowNull: false,
-    type: DataTypes.BOOLEAN
-  },
-  actions: {
+  description: {
     allowNull: false,
     type: DataTypes.STRING
   },
@@ -56,7 +44,7 @@ export const ZabbixSchema = {
   }
 }
 
-export class Zabbix extends Model {
+export class Novedad extends Model {
 
   static associate(){
     //associate
@@ -65,9 +53,11 @@ export class Zabbix extends Model {
   static config(sequelize:Sequelize) {
     return {
       sequelize,
-      tableName: ZABBIX_TABLE,
-      modelName: 'Zabbix',
+      tableName: NOVEDAD_TABLE,
+      modelName: 'Novedad',
       timestamps: true
     }
   }
+
+
 }

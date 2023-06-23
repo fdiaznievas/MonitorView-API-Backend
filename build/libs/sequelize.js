@@ -8,10 +8,10 @@ const dbEngine = (_a = config_1.config.dbEngine) === null || _a === void 0 ? voi
 const USER = encodeURIComponent(config_1.config.dbUser || "undefined");
 const PASSWORD = encodeURIComponent(config_1.config.dbPassword || "undefined");
 const URI = `${dbEngine}://${USER}:${PASSWORD}@${config_1.config.dbHost}:${config_1.config.dbPort}/${config_1.config.dbName}`;
-const sequelizeConnection = new sequelize_1.Sequelize(URI, {
+const sequelize = new sequelize_1.Sequelize(URI, {
     dialect: 'postgres',
     logging: true
 });
-(0, models_1.setupModels)(sequelizeConnection);
-exports.default = sequelizeConnection;
+(0, models_1.setupModels)(sequelize);
+exports.default = sequelize;
 // sequelize.sync() // { logging: console.log }  { alter:true } { force:true }

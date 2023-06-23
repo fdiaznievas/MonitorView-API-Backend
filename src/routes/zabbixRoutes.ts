@@ -7,6 +7,7 @@ import createSchema from '../schemas/zabbix.schema'
 import updateSchema from '../schemas/zabbix.schema'
 import getSchema from '../schemas/zabbix.schema'
 import replaceSchema from '../schemas/zabbix.schema'
+import deleteSchema from '../schemas/zabbix.schema'
 
 const router = express.Router();
 const service = new ZabbixService();
@@ -20,7 +21,6 @@ router.get('/:id',
   validatorHandler(getSchema.getSchema, 'params'),
   async (req, res, next) => {
     try {
-      console.log("Ejecuto middleware .get de zabbixRoutes")
       const { id } = req.params;
       const zabbix = await service.findOne(id);
       res.json(zabbix)
@@ -31,17 +31,17 @@ router.get('/:id',
 );
 
 //parametros Query
-router.get('/', (req:any,res:any) => {
-  const {limit, offset} = req.query;
-  if (limit && offset) {
-    res.json({
-      limit,
-      offset
-    })
-  } else {
-    res.send("No se enviaron parámetros")
-  }
-});
+// router.get('/', (req:any,res:any) => {
+//   const {limit, offset} = req.query;
+//   if (limit && offset) {
+//     res.json({
+//       limit,
+//       offset
+//     })
+//   } else {
+//     res.send("No se enviaron parámetros")
+//   }
+// });
 
 
 router.post('/',
@@ -72,32 +72,31 @@ router.patch('/:id',
   }
 );
 
-router.put('/:id',
-  validatorHandler(getSchema.getSchema, 'params'),
-  validatorHandler(replaceSchema.replaceSchema, 'body'),
-  async (req, res, next) => {
-    try {
-      const { id } = req.params;
-      const body = req.body;
-      const alertaZabbix = await service.replace(id, body);
-      res.json(alertaZabbix);
-    } catch(error) {
-      next(error)
-    }
-  }
-);
+// router.put('/:id',
+//   validatorHandler(getSchema.getSchema, 'params'),
+//   validatorHandler(replaceSchema.replaceSchema, 'body'),
+//   async (req, res, next) => {
+//     try {
+//       const { id } = req.params;
+//       const body = req.body;
+//       const alertaZabbix = await service.replace(id, body);
+//       res.json(alertaZabbix);
+//     } catch(error) {
+//       next(error)
+//     }
+//   }
+// );
 
 router.delete('/:id',
-  //validatorHandler(deleteSchema.deleteSchema, 'params')
+  validatorHandler(deleteSchema.deleteSchema, 'params'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
       const deleteAlert = await service.delete(id);
-      res.json(deleteAlert)
+      res.json(deleteAlert);
     } catch (error) {
       next(error);
     }
-
   }
 );
 

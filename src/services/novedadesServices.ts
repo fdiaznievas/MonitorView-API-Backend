@@ -1,67 +1,45 @@
-import novedadesDatos from './novedades.json'
+import boom from '@hapi/boom';
 
-import { pool } from '../libs/postgres.pool';
-import { getConnection } from '../libs/postgres';
+import sequelize from '../libs/sequelize';
 
-const novedades = novedadesDatos
 
 class NovedadesService {
-  listNovedades;
-  pool;
 
-  constructor() {
-    this.listNovedades = novedades;
-    this.pool = pool;
-    this.generate();
-  }
+  constructor() {}
 
-  generate() {
-
-  }
 
   async create(data:any){
-    const newNovedad = {
-      ... data
-    }
-    this.listNovedades.push(newNovedad);
+    const newNovedad = await sequelize.models.Novedad.create(data);
     return newNovedad;
   }
 
   async find() {
-    const query = 'SELECT * from zabbix';
-    const rta = await this.pool.query(query)
-    return rta.rows
+    const rta = await sequelize.models.Novedad.findAll();
+    return rta;
   }
 
-  async findOne(id:any) {
-    return this.listNovedades.find(item => item.id == id);
+  async findOne(id:string) {
+    const user:any|null = await sequelize.models.Novedad.findByPk(id);
+    if (!user) {
+      throw boom.notFound('user not found');
+    }
+    return user;
   }
 
   async update(id:any, changes:any) {
-    const index = this.listNovedades.findIndex(item => item.id == id);
-
-    if (index === -1) {
-      throw new Error('Evento no encontrado');
-    }
-    else {
-      const objNovedad = this.listNovedades[index];
-      this.listNovedades[index] = {
-        ...objNovedad,
-        ...changes
-      };
-    };
-
-    return this.listNovedades[index];
+    const user:any = await this.findOne(id)
+    const rta = await user.update(changes)
+    return rta
   }
 
-  async delete(id:any) {
-    const index = this.listNovedades.findIndex(item => item.id == id);
+  // async replace(time:any, changes:any) {
+  //   return
+  // }
 
-    if (index === -1) {
-      throw new Error('Evento no encontrado');
-    }
-    this.listNovedades.splice(index,1)
-    return { id };
+  async delete(id:any) {
+    const user:any = await this.findOne(id)
+    await user.destroy();
+    return { id }
   }
 }
 

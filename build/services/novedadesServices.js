@@ -12,57 +12,45 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const novedades_json_1 = __importDefault(require("./novedades.json"));
-const postgres_pool_1 = require("../libs/postgres.pool");
-const novedades = novedades_json_1.default;
+const boom_1 = __importDefault(require("@hapi/boom"));
+const sequelize_1 = __importDefault(require("../libs/sequelize"));
 class NovedadesService {
-    constructor() {
-        this.listNovedades = novedades;
-        this.pool = postgres_pool_1.pool;
-        this.generate();
-    }
-    generate() {
-    }
+    constructor() { }
     create(data) {
         return __awaiter(this, void 0, void 0, function* () {
-            const newNovedad = Object.assign({}, data);
-            this.listNovedades.push(newNovedad);
+            const newNovedad = yield sequelize_1.default.models.Novedad.create(data);
             return newNovedad;
         });
     }
     find() {
         return __awaiter(this, void 0, void 0, function* () {
-            const query = 'SELECT * from zabbix';
-            const rta = yield this.pool.query(query);
-            return rta.rows;
+            const rta = yield sequelize_1.default.models.Novedad.findAll();
+            return rta;
         });
     }
     findOne(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.listNovedades.find(item => item.id == id);
+            const user = yield sequelize_1.default.models.Novedad.findByPk(id);
+            if (!user) {
+                throw boom_1.default.notFound('user not found');
+            }
+            return user;
         });
     }
     update(id, changes) {
         return __awaiter(this, void 0, void 0, function* () {
-            const index = this.listNovedades.findIndex(item => item.id == id);
-            if (index === -1) {
-                throw new Error('Evento no encontrado');
-            }
-            else {
-                const objNovedad = this.listNovedades[index];
-                this.listNovedades[index] = Object.assign(Object.assign({}, objNovedad), changes);
-            }
-            ;
-            return this.listNovedades[index];
+            const user = yield this.findOne(id);
+            const rta = yield user.update(changes);
+            return rta;
         });
     }
+    // async replace(time:any, changes:any) {
+    //   return
+    // }
     delete(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const index = this.listNovedades.findIndex(item => item.id == id);
-            if (index === -1) {
-                throw new Error('Evento no encontrado');
-            }
-            this.listNovedades.splice(index, 1);
+            const user = yield this.findOne(id);
+            yield user.destroy();
             return { id };
         });
     }

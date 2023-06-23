@@ -28,7 +28,6 @@ router.get('/', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
 }));
 router.get('/:id', (0, validator_handler_1.validatorHandler)(zabbix_schema_3.default.getSchema, 'params'), (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        console.log("Ejecuto middleware .get de zabbixRoutes");
         const { id } = req.params;
         const zabbix = yield service.findOne(id);
         res.json(zabbix);
@@ -38,18 +37,17 @@ router.get('/:id', (0, validator_handler_1.validatorHandler)(zabbix_schema_3.def
     }
 }));
 //parametros Query
-router.get('/', (req, res) => {
-    const { limit, offset } = req.query;
-    if (limit && offset) {
-        res.json({
-            limit,
-            offset
-        });
-    }
-    else {
-        res.send("No se enviaron parámetros");
-    }
-});
+// router.get('/', (req:any,res:any) => {
+//   const {limit, offset} = req.query;
+//   if (limit && offset) {
+//     res.json({
+//       limit,
+//       offset
+//     })
+//   } else {
+//     res.send("No se enviaron parámetros")
+//   }
+// });
 router.post('/', (0, validator_handler_1.validatorHandler)(zabbix_schema_1.default.createSchema, 'body'), (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const body = req.body;
@@ -71,20 +69,21 @@ router.patch('/:id', (0, validator_handler_1.validatorHandler)(zabbix_schema_3.d
         next(error);
     }
 }));
-router.put('/:id', (0, validator_handler_1.validatorHandler)(zabbix_schema_3.default.getSchema, 'params'), (0, validator_handler_1.validatorHandler)(zabbix_schema_4.default.replaceSchema, 'body'), (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const { id } = req.params;
-        const body = req.body;
-        const alertaZabbix = yield service.replace(id, body);
-        res.json(alertaZabbix);
-    }
-    catch (error) {
-        next(error);
-    }
-}));
-router.delete('/:id', 
-//validatorHandler(deleteSchema.deleteSchema, 'params')
-(req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+// router.put('/:id',
+//   validatorHandler(getSchema.getSchema, 'params'),
+//   validatorHandler(replaceSchema.replaceSchema, 'body'),
+//   async (req, res, next) => {
+//     try {
+//       const { id } = req.params;
+//       const body = req.body;
+//       const alertaZabbix = await service.replace(id, body);
+//       res.json(alertaZabbix);
+//     } catch(error) {
+//       next(error)
+//     }
+//   }
+// );
+router.delete('/:id', (0, validator_handler_1.validatorHandler)(zabbix_schema_4.default.deleteSchema, 'params'), (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
         const deleteAlert = yield service.delete(id);
