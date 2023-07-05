@@ -30,17 +30,17 @@ class NovedadesService {
     }
     findOne(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const user = yield sequelize_1.default.models.Novedad.findByPk(id);
-            if (!user) {
+            const novedad = yield sequelize_1.default.models.Novedad.findByPk(id);
+            if (!novedad) {
                 throw boom_1.default.notFound('user not found');
             }
-            return user;
+            return novedad;
         });
     }
     update(id, changes) {
         return __awaiter(this, void 0, void 0, function* () {
-            const user = yield this.findOne(id);
-            const rta = yield user.update(changes);
+            const novedad = yield this.findOne(id);
+            const rta = yield novedad.update(changes);
             return rta;
         });
     }

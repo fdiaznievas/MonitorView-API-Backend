@@ -21,13 +21,14 @@ export function boomErrorHandler( err:any, _req:any, res:any, next:any) {
 
 export function sequelizeErrorHandler(err:any, req:any, res:any, next:any) {
   if(err instanceof ValidationError) {
-      res.status(409).json({
-          statusCode: 409,
-          name: err.name,
-          errors: err.errors
-      });
+    res.status(409).json({
+        statusCode: 409,
+        name: err.name,
+        errors: err.errors
+    });
+  } else {
+    next(err);
   }
-  next(err);
 }
 
 export function errorHandler( err:any, _req:any, res:any, next:any) {

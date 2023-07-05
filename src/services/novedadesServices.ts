@@ -19,16 +19,16 @@ class NovedadesService {
   }
 
   async findOne(id:string) {
-    const user:any|null = await sequelize.models.Novedad.findByPk(id);
-    if (!user) {
+    const novedad:any|null = await sequelize.models.Novedad.findByPk(id);
+    if (!novedad) {
       throw boom.notFound('user not found');
     }
-    return user;
+    return novedad;
   }
 
   async update(id:any, changes:any) {
-    const user:any = await this.findOne(id)
-    const rta = await user.update(changes)
+    const novedad:any = await this.findOne(id)
+    const rta = await novedad.update(changes)
     return rta
   }
 

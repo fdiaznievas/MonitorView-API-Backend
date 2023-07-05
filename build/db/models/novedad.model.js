@@ -10,18 +10,13 @@ exports.NovedadSchema = {
         autoIncrement: true,
         type: sequelize_1.DataTypes.INTEGER
     },
-    caseId: {
-        allowNull: false,
-        type: sequelize_1.DataTypes.INTEGER,
-        unique: true
-    },
     problemDate: {
         allowNull: false,
         type: sequelize_1.DataTypes.DATE
     },
     cid: {
         allowNull: false,
-        type: sequelize_1.DataTypes.INTEGER
+        type: sequelize_1.DataTypes.STRING
     },
     sitio: {
         allowNull: false,
@@ -30,6 +25,10 @@ exports.NovedadSchema = {
     description: {
         allowNull: false,
         type: sequelize_1.DataTypes.STRING
+    },
+    estado: {
+        allowNull: false,
+        type: sequelize_1.DataTypes.BOOLEAN
     },
     createdAt: {
         allowNull: false,

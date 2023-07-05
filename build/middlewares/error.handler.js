@@ -27,7 +27,9 @@ function sequelizeErrorHandler(err, req, res, next) {
             errors: err.errors
         });
     }
-    next(err);
+    else {
+        next(err);
+    }
 }
 exports.sequelizeErrorHandler = sequelizeErrorHandler;
 function errorHandler(err, _req, res, next) {

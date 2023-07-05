@@ -9,18 +9,13 @@ export const NovedadSchema = {
     autoIncrement: true,
     type: DataTypes.INTEGER
   },
-  caseId: {
-    allowNull: false,
-    type: DataTypes.INTEGER,
-    unique: true
-  },
   problemDate: {
     allowNull: false,
     type: DataTypes.DATE
   },
   cid: {
     allowNull: false,
-    type: DataTypes.INTEGER
+    type: DataTypes.STRING
   },
   sitio: {
     allowNull: false,
@@ -29,6 +24,10 @@ export const NovedadSchema = {
   description: {
     allowNull: false,
     type: DataTypes.STRING
+  },
+  estado: {
+    allowNull: false,
+    type: DataTypes.BOOLEAN
   },
   createdAt: {
     allowNull: false,
