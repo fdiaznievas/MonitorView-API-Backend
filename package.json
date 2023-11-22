@@ -8,6 +8,7 @@
     "start": "node ./build/index.js",
     "dev": "nodemon ./build/index.js",
     "lint": "eslint",
+    "docker-up": "docker-compose up pgadmin4 -d && docker-compose up postgres",
     "test": "echo \"Error: no test specified\" && exit 1",
     "migrations:generate": "sequelize-cli migration:generate --name",
     "migrations:run": "sequelize-cli db:migrate",
